@@ -52,7 +52,17 @@ cp .env.example .env
 # 4. Jalankan MongoDB via Docker
 docker-compose up -d
 
-# 5. Jalankan aplikasi
+# 5. Jalankan seeder (Opsional untuk test admin role account)
+npm run seed
+# Output:
+# ✅ Admin user created
+#    📧 Email: admin@example.com
+#    🔑 Password: Admin123
+# ✅ Demo user created
+#    📧 Email: user@example.com
+#    🔑 Password: User123
+
+# 6. Jalankan aplikasi
 npm run start:dev
 
 # Aplikasi berjalan di: http://localhost:3000
