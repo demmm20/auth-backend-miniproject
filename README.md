@@ -102,17 +102,12 @@ File `.env` berisi konfigurasi berikut:
 - `GET /users/me` - Get profile user sendiri (Protected)
 - `GET /users` - Get semua user (Admin only)
 
-Dokumentasi API lengkap tersedia di `API-DOCUMENTATION.md`
-
 ---
 
 ## Keputusan Desain
 
 ### Token Lifecycle Strategy
 Refresh token disimpan di database untuk validasi tambahan dan keamanan. Saat user logout, refresh token dihapus dari database (revoke). Setiap refresh menghasilkan pasangan access + refresh token baru untuk meningkatkan keamanan. Strategy ini memberikan balance antara security (dapat revoke token) dan simplicity (tidak perlu Redis untuk scale kecil-menengah).
-
-### Rate Limiting
-Implementasi dual-layer rate limiting: global rate limit (10 requests/minute) untuk semua endpoint, dan rate limit khusus untuk login (5 requests/minute) yang lebih strict untuk melindungi dari brute force attacks. Login endpoint lebih rentan sehingga memerlukan proteksi ekstra.
 
 ### Role-based Access Control
 Dua role tersedia: `user` (default) dan `admin`. User dapat melihat profile sendiri via `/users/me`. Admin memiliki akses tambahan untuk melihat semua user via `/users`. Implementasi menggunakan custom RolesGuard dan Roles decorator untuk flexibility dan reusability.
@@ -181,7 +176,6 @@ Testing manual dengan Postman/Insomnia tersedia di `POSTMAN-TESTING-GUIDE.md`
 - Password hashing dengan bcrypt (salt rounds: 10)
 - JWT dengan expiry time (access: 15m, refresh: 7d)
 - Refresh token validation di database
-- Rate limiting (global & login-specific)
 - Protected routes dengan JWT Guard
 - Role-based access control
 - Email unique constraint
@@ -202,9 +196,8 @@ Testing manual dengan Postman/Insomnia tersedia di `POSTMAN-TESTING-GUIDE.md`
 
 ### Bonus Features 
 1. Refresh Token + Revoke - `POST /auth/refresh` dan `POST /auth/logout`
-2. Rate Limiting - Global (10 req/min) + Login (5 req/min)
-3. Admin Listing - `GET /users` untuk admin only
-4. Docker Support - `docker-compose.yml` untuk MongoDB
+2. Admin Listing - `GET /users` untuk admin only
+3. Docker Support - `docker-compose.yml` untuk MongoDB
 
 ---
 
@@ -223,7 +216,6 @@ Testing manual dengan Postman/Insomnia tersedia di `POSTMAN-TESTING-GUIDE.md`
 - Access protected route tanpa token → `401 Unauthorized`
 - Access protected route dengan token invalid/expired → `401 Unauthorized`
 - Access admin route sebagai user → `403 Forbidden`
-- Exceed rate limit → `429 Too Many Requests`
 
 ---
 
