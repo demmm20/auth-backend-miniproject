@@ -1,15 +1,13 @@
 # Backend Auth NestJS - Mini Project PT SEJADI
 
-Backend authentication system menggunakan NestJS, MongoDB, dan JWT dengan fitur lengkap: register, login, refresh token, logout, dan role-based access control.
-
----
+Backend authentication system menggunakan NestJS, MongoDB, dan JWT. Dibangun untuk memenuhi requirements mini project internship Fullstack JavaScript di PT SEJADI.
 
 ## Author
 
 **Demas Zhafran Zharif**  
 NPM: 23082010085  
 Program Studi Sistem Informasi  
-UPN "Veteran" Jawa Timur  
+UPN "Veteran" Jawa Timur
 
 **Contact:**
 - Email: zhafrandemas@gmail.com
@@ -18,25 +16,10 @@ UPN "Veteran" Jawa Timur
 
 ---
 
-## License
-
-This project is part of internship application for PT SEJADI (Sinergi Jaya Digital).
-
----
-
-## Acknowledgments
-
-Mini Project ini dibuat sebagai bagian dari proses seleksi internship Fullstack JavaScript di PT SEJADI. Terima kasih kepada:
-- PT SEJADI atas kesempatan ini
-- Dicoding & Accenture atas pembelajaran selama Independent Study
-- Tim Capstone QuizMate atas kolaborasi yang luar biasa
-- UPN "Veteran" Jawa Timur atas dukungan akademik
-
----
-
 ## Cara Menjalankan
 
 ### Dengan Docker (Recommended)
+
 ```bash
 # 1. Clone repository
 git clone <your-repo-url>
@@ -52,23 +35,14 @@ cp .env.example .env
 # 4. Jalankan MongoDB via Docker
 docker-compose up -d
 
-# 5. Jalankan seeder (Opsional untuk test admin role account)
-npm run seed
-# Output:
-# ✅ Admin user created
-#    📧 Email: admin@example.com
-#    🔑 Password: Admin123
-# ✅ Demo user created
-#    📧 Email: user@example.com
-#    🔑 Password: User123
-
-# 6. Jalankan aplikasi
+# 5. Jalankan aplikasi
 npm run start:dev
 
 # Aplikasi berjalan di: http://localhost:3000
 ```
 
 ### Tanpa Docker (Local MongoDB)
+
 ```bash
 # 1. Pastikan MongoDB berjalan di localhost:27017
 
@@ -117,12 +91,15 @@ File `.env` berisi konfigurasi berikut:
 ## Keputusan Desain
 
 ### Token Lifecycle Strategy
+
 Refresh token disimpan di database untuk validasi tambahan dan keamanan. Saat user logout, refresh token dihapus dari database (revoke). Setiap refresh menghasilkan pasangan access + refresh token baru untuk meningkatkan keamanan. Strategy ini memberikan balance antara security (dapat revoke token) dan simplicity (tidak perlu Redis untuk scale kecil-menengah).
 
 ### Role-based Access Control
+
 Dua role tersedia: `user` (default) dan `admin`. User dapat melihat profile sendiri via `/users/me`. Admin memiliki akses tambahan untuk melihat semua user via `/users`. Implementasi menggunakan custom RolesGuard dan Roles decorator untuk flexibility dan reusability.
 
 ### Security Features
+
 Password di-hash menggunakan bcrypt dengan salt rounds 10 untuk balance antara security dan performance. JWT memiliki expiry time yang configurable (access token short-lived 15m, refresh token long-lived 7d). Protected routes menggunakan JWT Guard via Passport strategy. Data sensitif (password hash, refresh token) tidak pernah dikembalikan di response API. Email disimpan dalam lowercase dengan unique constraint di database level.
 
 ---
@@ -133,7 +110,7 @@ Password di-hash menggunakan bcrypt dengan salt rounds 10 untuk balance antara s
 - **Database**: MongoDB + Mongoose 9.1.6
 - **Authentication**: JWT (@nestjs/jwt, passport-jwt)
 - **Validation**: class-validator + class-transformer
-- **Security**: bcrypt 6.0.0, @nestjs/throttler 6.5.0
+- **Security**: bcrypt 6.0.0
 - **Language**: TypeScript 5.7.3
 - **DevOps**: Docker, Docker Compose
 
@@ -177,7 +154,7 @@ npm run test:e2e
 npm run test:cov
 ```
 
-Testing manual dengan Postman/Insomnia tersedia di `POSTMAN-TESTING-GUIDE.md`
+Testing manual dengan Postman/Insomnia tersedia di folder `screenshots/`
 
 ---
 
@@ -229,4 +206,14 @@ Testing manual dengan Postman/Insomnia tersedia di `POSTMAN-TESTING-GUIDE.md`
 
 ---
 
-**Built using NestJS & TypeScript**
+## License
+
+This project is part of internship application for PT SEJADI (Sinergi Jaya Digital).
+
+## Acknowledgments
+
+Mini Project ini dibuat sebagai bagian dari proses seleksi internship Fullstack JavaScript di PT SEJADI. Terima kasih kepada:
+- PT SEJADI atas kesempatan ini
+- Dicoding & Accenture atas pembelajaran selama Independent Study
+- Tim Capstone QuizMate atas kolaborasi yang luar biasa
+- UPN "Veteran" Jawa Timur atas dukungan akademik
