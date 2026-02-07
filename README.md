@@ -159,7 +159,7 @@ src/
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Unit tests
