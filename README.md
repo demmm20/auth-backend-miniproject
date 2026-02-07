@@ -4,7 +4,37 @@ Backend authentication system menggunakan NestJS, MongoDB, dan JWT dengan fitur 
 
 ---
 
-## 🚀 Cara Menjalankan
+## Author
+
+**Demas Zhafran Zharif**  
+NPM: 23082010085  
+Program Studi Sistem Informasi  
+UPN "Veteran" Jawa Timur  
+
+**Contact:**
+- Email: zhafrandemas@gmail.com
+- LinkedIn: [linkedin.com/in/demaszhafran](https://linkedin.com/in/demaszhafran)
+- GitHub: [github.com/demmm20](https://github.com/demmm20)
+
+---
+
+## License
+
+This project is part of internship application for PT SEJADI (Sinergi Jaya Digital).
+
+---
+
+## Acknowledgments
+
+Mini Project ini dibuat sebagai bagian dari proses seleksi internship Fullstack JavaScript di PT SEJADI. Terima kasih kepada:
+- PT SEJADI atas kesempatan ini
+- Dicoding & Accenture atas pembelajaran selama Independent Study
+- Tim Capstone QuizMate atas kolaborasi yang luar biasa
+- UPN "Veteran" Jawa Timur atas dukungan akademik
+
+---
+
+## Cara Menjalankan
 
 ### Dengan Docker (Recommended)
 ```bash
@@ -44,7 +74,7 @@ npm run start:dev
 
 ---
 
-## 🔧 Environment Variables
+## Environment Variables
 
 File `.env` berisi konfigurasi berikut:
 
@@ -60,7 +90,7 @@ File `.env` berisi konfigurasi berikut:
 
 ---
 
-## 📋 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /auth/register` - Register user baru
@@ -76,7 +106,7 @@ Dokumentasi API lengkap tersedia di `API-DOCUMENTATION.md`
 
 ---
 
-## 🎯 Keputusan Desain
+## Keputusan Desain
 
 ### Token Lifecycle Strategy
 Refresh token disimpan di database untuk validasi tambahan dan keamanan. Saat user logout, refresh token dihapus dari database (revoke). Setiap refresh menghasilkan pasangan access + refresh token baru untuk meningkatkan keamanan. Strategy ini memberikan balance antara security (dapat revoke token) dan simplicity (tidak perlu Redis untuk scale kecil-menengah).
@@ -92,7 +122,7 @@ Password di-hash menggunakan bcrypt dengan salt rounds 10 untuk balance antara s
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: NestJS 11.0.1
 - **Database**: MongoDB + Mongoose 9.1.6
@@ -104,7 +134,7 @@ Password di-hash menggunakan bcrypt dengan salt rounds 10 untuk balance antara s
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 src/
@@ -146,40 +176,39 @@ Testing manual dengan Postman/Insomnia tersedia di `POSTMAN-TESTING-GUIDE.md`
 
 ---
 
-## 🔒 Security Checklist
+## Security Checklist
 
-- ✅ Password hashing dengan bcrypt (salt rounds: 10)
-- ✅ JWT dengan expiry time (access: 15m, refresh: 7d)
-- ✅ Refresh token validation di database
-- ✅ Rate limiting (global & login-specific)
-- ✅ Protected routes dengan JWT Guard
-- ✅ Role-based access control
-- ✅ Email unique constraint
-- ✅ Input validation dengan class-validator
-- ✅ No sensitive data in response (password, refresh token)
-- ✅ Environment variables untuk secrets
-
----
-
-## 📝 Features Implemented
-
-### Required Features ✅
-1. ✅ Register - `POST /auth/register` dengan email & password hashing
-2. ✅ Login - `POST /auth/login` dengan JWT access token
-3. ✅ Protected Route - `GET /users/me` dengan JWT validation
-4. ✅ Token Lifecycle - Access token expiry + refresh mechanism
-5. ✅ Role-based Access - Admin dapat lihat semua user, user hanya diri sendiri
-
-### Bonus Features ✅
-1. ✅ Refresh Token + Revoke - `POST /auth/refresh` dan `POST /auth/logout`
-2. ✅ Rate Limiting - Global (10 req/min) + Login (5 req/min)
-3. ✅ Admin Listing - `GET /users` untuk admin only
-4. ✅ Docker Support - `docker-compose.yml` untuk MongoDB
-5. ✅ API Documentation - Lengkap di `API-DOCUMENTATION.md`
+- Password hashing dengan bcrypt (salt rounds: 10)
+- JWT dengan expiry time (access: 15m, refresh: 7d)
+- Refresh token validation di database
+- Rate limiting (global & login-specific)
+- Protected routes dengan JWT Guard
+- Role-based access control
+- Email unique constraint
+- Input validation dengan class-validator
+- No sensitive data in response (password, refresh token)
+- Environment variables untuk secrets
 
 ---
 
-## 🚦 Expected Behavior
+## Features Implemented
+
+### Required Features 
+1. Register - `POST /auth/register` dengan email & password hashing
+2. Login - `POST /auth/login` dengan JWT access token
+3. Protected Route - `GET /users/me` dengan JWT validation
+4. Token Lifecycle - Access token expiry + refresh mechanism
+5. Role-based Access - Admin dapat lihat semua user, user hanya diri sendiri
+
+### Bonus Features 
+1. Refresh Token + Revoke - `POST /auth/refresh` dan `POST /auth/logout`
+2. Rate Limiting - Global (10 req/min) + Login (5 req/min)
+3. Admin Listing - `GET /users` untuk admin only
+4. Docker Support - `docker-compose.yml` untuk MongoDB
+
+---
+
+## Expected Behavior
 
 ### Success Cases
 - Register dengan email baru → `201 Created` dengan user data + tokens
@@ -198,34 +227,4 @@ Testing manual dengan Postman/Insomnia tersedia di `POSTMAN-TESTING-GUIDE.md`
 
 ---
 
-## 👨‍💻 Author
-
-**Demas Zhafran Zharif**  
-NPM: 23082010085  
-Program Studi Sistem Informasi  
-UPN "Veteran" Jawa Timur  
-
-**Contact:**
-- Email: zhafrandemas@gmail.com
-- LinkedIn: [linkedin.com/in/demaszhafran](https://linkedin.com/in/demaszhafran)
-- GitHub: [github.com/demmm20](https://github.com/demmm20)
-
----
-
-## 📄 License
-
-This project is part of internship application for PT SEJADI (Sinergi Jaya Digital).
-
----
-
-## 🙏 Acknowledgments
-
-Mini Project ini dibuat sebagai bagian dari proses seleksi internship Fullstack JavaScript di PT SEJADI. Terima kasih kepada:
-- PT SEJADI atas kesempatan ini
-- Dicoding & Accenture atas pembelajaran selama Independent Study
-- Tim Capstone QuizMate atas kolaborasi yang luar biasa
-- UPN "Veteran" Jawa Timur atas dukungan akademik
-
----
-
-**Built with ❤️ using NestJS & TypeScript**
+**Built using NestJS & TypeScript**
